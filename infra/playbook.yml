@@ -1,0 +1,15 @@
+---
+- name: This playbook sets up NZOSS GIS Live DVD infrastructure
+  hosts: all
+  sudo: true
+  sudo_user: root
+  #roles:
+  #- postgresql
+
+  vars:
+    postgresql_version: "9.4"
+    postgresql_package_version: "9.4.*-1.pgdg14.04+1"
+
+  roles:
+    - locale
+    - postgresql
