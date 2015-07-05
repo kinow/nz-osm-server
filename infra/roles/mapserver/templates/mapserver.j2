@@ -1,0 +1,79 @@
+#! /bin/bash
+#
+# description: Mapserver Service Manager
+# processname: lt-mapserv
+# pidfile: /var/run/mapserver.pid
+# Source function library.
+#. /etc/init.d/functions
+# Check that networking is up.
+#. /etc/sysconfig/network
+# Fixed with https://www.linode.com/docs/websites/nginx/nginx-and-phpfastcgi-on-ubuntu-10-04-lts-lucid
+
+if [ "$NETWORKING" = "no" ]
+then
+        exit 0
+fi
+PREFIX=/usr
+NAME=mapserv
+PID=/var/run/mapserv.pid
+DAEMON=$PREFIX/bin/spawn-fcgi
+DAEMON_OPTS=" -a 127.0.0.1 -p 9999 -F 4 -u www-data -g www-data -P $PID $PREFIX/lib/cgi-bin/mapserv"
+start () {
+    if [[ -r $PID ]]
+    then
+        echo "mapserver already running with PID `cat $PID`"
+        RET_VAL=1
+    else
+        echo -n "Starting $NAME "
+        exec $DAEMON $DAEMON_OPTS >> /dev/null
+        RETVAL=$?
+        if [ $RETVAL -eq 0 ]
+        then
+            daemon --pidfile $PID
+        fi
+        echo
+        [ $RETVAL -eq 0 ]
+    fi
+}
+stop () {
+    if [[ -r $PID ]]
+    then
+        echo -n "Stopping $NAME "
+        kill `cat $PID`
+        rm $PID
+        RETVAL=$?
+    else
+        echo "Could not find PID file $PID"
+        RETVAL=1
+    fi
+}
+restart () {
+    stop
+    start
+}
+# See how we were called.
+case "$1" in
+  start)
+        start
+    ;;
+  stop)
+        stop
+    ;;
+  status)
+    if [[ -r $PID ]]
+    then
+        echo "mapserver running with PID `cat $PID`"
+        RETVAL=$?
+    else
+        echo "Could not find PID file $PID, mapserver does not appear to be running"
+    fi
+    ;;
+  restart)
+    restart
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|status|restart}"
+    RETVAL=2
+    ;;
+esac
+exit $RETVAL

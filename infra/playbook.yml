@@ -13,3 +13,4 @@
   roles:
     - locale
     - postgresql
+    - mapserver

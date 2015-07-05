@@ -1,0 +1,54 @@
+# TODO: nginx could be a separate role too
+
+---
+- name: Install Packages
+  apt: >
+    pkg={{item}}
+    state=installed
+    update-cache=yes
+  with_items:
+    - mapserver-bin
+    - cgi-mapserver
+    - nginx
+    - spawn-fcgi
+  tags:
+    - mapserver
+    - nginx
+
+- name: Copy mapserver fastcgi service script
+  template: src=mapserver.j2 dest=/etc/init.d/mapserver owner=root group=root mode=0755
+  tags:
+    - mapserver
+
+- name: Start nginx server
+  service: name=nginx state=started enabled=yes
+  tags:
+    - mapserver
+    - nginx
+
+- name: Start mapserver server
+  service: name=mapserver state=started enabled=yes
+  tags:
+    - mapserver
+
+- name: Disable default server
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  tags:
+    - mapserver
+    - nginx
+
+- name: Copy mapserver nginx site
+  template: src=mapserver-site.j2 dest=/etc/nginx/sites-available/mapserver-site owner=root group=root mode=0644
+  tags:
+    - mapserver
+    - nginx
+
+- name: Enable mapserver nginx site
+  file: src="/etc/nginx/sites-available/mapserver-site"
+        dest="/etc/nginx/sites-enabled/mapserver-site"
+        owner=root
+        group=root
+        state=link
+
+- name: restart nginx
+  service: name=nginx state=restarted
