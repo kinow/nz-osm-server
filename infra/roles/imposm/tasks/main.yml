@@ -1,0 +1,19 @@
+---
+- name: Install Packages
+  apt: >
+    pkg={{item}}
+    state=installed
+    update-cache=yes
+  with_items:
+    - build-essential
+    - python-dev
+    - protobuf-compiler
+    - libprotobuf-dev
+    - libtokyocabinet-dev
+    - python-psycopg2
+    - libgeos-c1
+    - python-pip
+  tags:
+    - imposm
+
+- pip: name=imposm

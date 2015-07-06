@@ -14,3 +14,4 @@
     - locale
     - postgresql
     - mapserver
+    - imposm
