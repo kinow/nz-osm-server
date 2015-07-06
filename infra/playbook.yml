@@ -10,6 +10,13 @@
     postgresql_version: "9.4"
     postgresql_package_version: "9.4.*-1.pgdg14.04+1"
 
+  handlers:
+  - name: restart nginx
+    service: name=nginx state=restarted
+
+  - name: restart postgresql
+    service: name=postgresql state=restarted
+
   roles:
     - locale
     - postgresql
