@@ -13,6 +13,8 @@
     - python-psycopg2
     - libgeos-c1
     - python-pip
+    - unzip
+    
   tags:
     - imposm
 
