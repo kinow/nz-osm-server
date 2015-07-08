@@ -1,0 +1,9 @@
+---
+- name: Download mapserver/basemaps from GitHub
+  sudo: yes
+  shell: wget https://github.com/mapserver/basemaps/archive/master.zip && unzip /opt/master.zip -d /opt/basemaps
+    chdir: /opt/
+    creates: /opt/basemaps
+  tags:
+    - imposm
+
