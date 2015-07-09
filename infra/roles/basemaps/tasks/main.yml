@@ -9,7 +9,7 @@
     - basemaps
 
 - name: Create path for images
-  file: path=/var/basemaps/ms_tmp/ state=directory owner=root group=root mode=0644
+  file: path=/var/basemaps/ms_tmp/ state=directory owner=www-data group=www-data mode=0777
   tags:
     - basemaps
 
@@ -36,5 +36,10 @@
   args:
     chdir: /opt/basemaps/
     creates: /opt/basemaps/osm-google.map
+  tags:
+    - basemaps
+
+- name: Fix basemaps osm-google.map permissions
+  file: path=/opt/basemaps/osm-google.map owner=root group=root mode=0755
   tags:
     - basemaps
