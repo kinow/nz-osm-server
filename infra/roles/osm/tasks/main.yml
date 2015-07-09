@@ -15,9 +15,9 @@
 
 - name: Read data using imposm
   sudo: yes
-  shell: imposm --proj=EPSG:3857 --read new-zealand-latest.osm.pbf
+  shell: imposm --proj=EPSG:3857 --read new-zealand-latest.osm.pbf && touch /var/osm/imposm_coords.cache
   args:
-    creates: /var/osm/imposm_coods.cache
+    creates: /var/osm/imposm_coords.cache
     chdir: /var/osm/
   tags:
     - osm
