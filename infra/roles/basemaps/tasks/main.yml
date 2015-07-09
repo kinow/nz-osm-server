@@ -24,9 +24,17 @@
     - basemaps
 
 - name: Download basemaps data
-  shell: cd /opt/basemaps/data && make
+  shell: make
   args:
+    chdir: /opt/basemaps/data/
     creates: /opt/basemaps/data/TM_WORLD_BORDERS-0.3.zip
   tags:
     - basemaps
 
+- name: Create map file
+  shell: make
+  args:
+    chdir: /opt/basemaps/
+    creates: /opt/basemaps/osm-google.map
+  tags:
+    - basemaps
