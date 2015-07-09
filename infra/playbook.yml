@@ -21,6 +21,6 @@
     - locale
     - postgresql
     - mapserver
-    - osm
     - imposm
+    - osm
     - basemaps
