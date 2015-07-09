@@ -1,9 +1,32 @@
 ---
 - name: Download mapserver/basemaps from GitHub
   sudo: yes
-  shell: wget https://github.com/mapserver/basemaps/archive/master.zip && unzip /opt/master.zip -d /opt/basemaps
+  shell: wget https://github.com/mapserver/basemaps/archive/master.zip && unzip /opt/master.zip -d /opt/ && mv /opt/basemaps-master /opt/basemaps
+  args:
     chdir: /opt/
     creates: /opt/basemaps
   tags:
-    - imposm
+    - basemaps
+
+- name: Create path for images
+  file: path=/var/basemaps/ms_tmp/ state=directory owner=root group=root mode=0644
+  tags:
+    - basemaps
+
+- name: Fix basemaps osmbase.map file
+  template: src=osmbase.map.j2 dest=/opt/basemaps/osmbase.map owner=root group=root mode=0644
+  tags:
+    - basemaps
+
+- name: Fix basemaps Makefile file
+  template: src=Makefile.j2 dest=/opt/basemaps/Makefile owner=root group=root mode=0644
+  tags:
+    - basemaps
+
+- name: Download basemaps data
+  shell: cd /opt/basemaps/data && make
+  args:
+    creates: /opt/basemaps/data/TM_WORLD_BORDERS-0.3.zip
+  tags:
+    - basemaps
 
