@@ -30,6 +30,12 @@ ansible-vagrant.sh script).
 The virtual machine will be running Nginx listening to the guest port 80. The 80 port of the virtual machine is exposed
 to the host machine as 8080.
 
+You can mirror local ports with SSH.
+
+`sudo ssh -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i .vagrant/machines/default/virtualbox/private_key`
+
+Where 2222 is the default port used by Vagrant.
+
 ## Testing
 
 You can test Mapservice opening the following URL in your browser.
