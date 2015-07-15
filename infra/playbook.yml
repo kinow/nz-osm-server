@@ -1,6 +1,5 @@
 ---
 - hosts: vagrant
-  server_name: 192.168.100.100
   vars:
     server_name: 192.168.100.100
 
