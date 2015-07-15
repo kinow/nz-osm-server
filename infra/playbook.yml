@@ -1,4 +1,9 @@
 ---
+- hosts: vagrant
+  server_name: 192.168.100.100
+  vars:
+    server_name: 192.168.100.100
+
 - name: This playbook sets up NZOSS GIS Live DVD infrastructure
   hosts: all
   sudo: true
