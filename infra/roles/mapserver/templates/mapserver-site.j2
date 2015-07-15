@@ -1,6 +1,12 @@
+log_format traffic '$remote_addr - $remote_user [$time_local] '
+                    '"$request" $status $body_bytes_sent '
+                    '"$http_referer" "$http_user_agent" '
+                    '$bytes_sent $request_time';
+
 server {
-    listen   80;
-    server_name  localhost;
+    listen   80 default_server;
+    server_name {{ SERVER_NAME }};
+    access_log /var/log/nginx/mapserver_access.log traffic;
     # MapServer
     location / {
         fastcgi_pass   127.0.0.1:9999;
