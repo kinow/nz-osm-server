@@ -38,6 +38,8 @@
   tags:
     - mapserver
     - nginx
+  notify:
+    - restart nginx
 
 - name: Copy mapserver nginx site
   template: src=mapserver-site.j2 dest=/etc/nginx/sites-available/mapserver-site owner=root group=root mode=0644
