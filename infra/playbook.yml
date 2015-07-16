@@ -1,8 +1,6 @@
 ---
 - name: This playbook sets up NZOSS GIS infrastructure with Vagrant
   hosts: vagrant
-  vars:
-    server_name: 192.168.100.100
   sudo: true
   sudo_user: root
   #roles:
@@ -11,6 +9,7 @@
   vars:
     postgresql_version: "9.4"
     postgresql_package_version: "9.4.*-1.pgdg14.04+1"
+    server_name: 192.168.100.100
 
   handlers:
   - name: restart nginx
@@ -28,7 +27,7 @@
     - basemaps
 
 - name: This playbook sets up NZOSS GIS Live DVD infrastructure
-  hosts: all
+  hosts: catalyst
   sudo: true
   sudo_user: root
   #roles:
