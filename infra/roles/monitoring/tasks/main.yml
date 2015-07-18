@@ -1,0 +1,9 @@
+- name: graphite container
+  docker:
+    name: ?
+    image: ?
+    state: started
+    expose:
+    - 80
+    volumes_from:
+    - mydata
