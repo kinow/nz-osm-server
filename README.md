@@ -1,30 +1,28 @@
-# nzoss-gis-live-dvd
+# NZ OpenStreetMap Server
 
-NZOSS GIS live DVD.
-
-WIP: work project description
+This project contains the automated scripts to set up a OSM server for New Zealand.
 
 ## Datasets
 
-WIP: explain the datasets being used
+The data being used comes from GeoFabrik, and is loaded periodically in the server, using
+a PostgreSQL database.
 
 ## Infrastructure
 
 The infrastructure is compromised of:
-
-WIP: list exact versions and role
 
 * a Postgres database
 * PostGIS extension loaded in Postgres
 * mapserver
 * imposm
 * nginx
+* Graphite
+* LogStash
 
 This project includes an Ansible playbook, with automated instructions to set up the environment. The playbook
-works for both Vagrant and Docker, but it can also be used locally or to set up a server via SSH.
+works for Vagrant, but it can also be used locally or to set up a server via SSH.
 
 In order to install the infrastructure you will need:
 
 * Vagrant (and VMWare or VirtualBox), or Docker, a Linux computer or SSH access to a server
 * Ansible
-
