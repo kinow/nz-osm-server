@@ -16,6 +16,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   puts "proxyconf..."
   if Vagrant.has_plugin?("vagrant-proxyconf")
     puts "find proxyconf plugin !"
+    puts "$http_proxy -> " + ENV["http_proxy"].to_s
+    puts "$https_proxy -> " + ENV["https_proxy"].to_s
+
+    config.proxy.no_proxy = "" + ENV["no_proxy"].to_s
+
     if ENV["http_proxy"]
       puts "http_proxy: " + ENV["http_proxy"]
       config.proxy.http     = ENV["http_proxy"]
@@ -33,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = "playbook.yml"
     ansible.inventory_path = "hosts"
     ansible.sudo = true
-    ansible.verbose = "vvv"
+    ansible.verbose = "vvvv"
   end
 
   config.vm.provider "virtualbox" do |v|
