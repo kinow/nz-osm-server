@@ -46,6 +46,8 @@
   tags:
     - mapserver
     - nginx
+  notify:
+    - restart nginx
 
 - name: Enable mapserver nginx site
   file: src="/etc/nginx/sites-available/mapserver-site"

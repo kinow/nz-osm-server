@@ -3,20 +3,11 @@
   hosts: vagrant
   sudo: true
   sudo_user: root
-  #roles:
-  #- postgresql
 
   vars:
     postgresql_version: "9.4"
     postgresql_package_version: "9.4.*-1.pgdg14.04+1"
     server_name: 192.168.100.100
-
-  handlers:
-  - name: restart nginx
-    service: name=nginx state=restarted
-
-  - name: restart postgresql
-    service: name=postgresql state=restarted
 
   roles:
     - locale
@@ -31,19 +22,10 @@
   hosts: catalyst
   sudo: true
   sudo_user: root
-  #roles:
-  #- postgresql
 
   vars:
     postgresql_version: "9.4"
     postgresql_package_version: "9.4.*-1.pgdg14.04+1"
-
-  handlers:
-  - name: restart nginx
-    service: name=nginx state=restarted
-
-  - name: restart postgresql
-    service: name=postgresql state=restarted
 
   roles:
     - locale
