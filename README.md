@@ -26,3 +26,7 @@ In order to install the infrastructure you will need:
 
 * Vagrant (and VMWare or VirtualBox), or Docker, a Linux computer or SSH access to a server
 * Ansible
+* 
+## License
+
+Licensed under the MIT License. See LICENSE.txt.
