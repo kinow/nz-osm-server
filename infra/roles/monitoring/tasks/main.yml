@@ -19,11 +19,11 @@
   docker:
     name: graphite
     image: hopsoft/graphite-statsd
-    state: started
+    state: running
     ports:
     - "8080:80"
     - "2003:2003"
     - "8125:8125/udp"
-    insecure_registry: true
+    #insecure_registry: true
   tags:
   - monitoring
