@@ -1,0 +1,5 @@
+- name: restart logstash
+  service: name=logstash state=restarted enabled=yes
+
+- name: restart collectd
+  service: name=collectd state=restarted enabled=yes

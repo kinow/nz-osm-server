@@ -1,19 +1,8 @@
-- name: install curl
-  apt: name={{ item }} update_cache=yes
-  with_items:
-    - git
-    - curl
-    - libpq-dev
-    - python-dev
-    - python-psycopg2
+- include: graphite.yml
 
-- name: install docker
-  shell: curl -sSL https://get.docker.com/ | sh
-  args:
-    creates: /usr/bin/docker
+- include: collectd.yml
 
-- name: Install docker-py
-  pip: name=docker-py version=1.1.0
+- include: logstash.yml
 
 - name: graphite container
   docker:
@@ -27,3 +16,4 @@
     #insecure_registry: true
   tags:
   - monitoring
+
