@@ -12,3 +12,12 @@
     creates: /var/osm/new-zealand-latest.osm.pbf
   tags:
     - osm
+
+- name: Copy update.sh shell script to /var/osm
+  sudo: yes
+  template: src=update.sh.j2 dest=/var/osm/update.sh owner=root group=root mode=0644
+  tags:
+    - osm
+    - cron
+
+- cron: name="Update the OSM map weekly" special_time=weekly job="/var/osm/update.sh"
