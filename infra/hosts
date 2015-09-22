@@ -1,2 +1,5 @@
 [vagrant]
 default ansible_ssh_host=192.168.100.100
+
+[catalyst]
+150.242.41.10
