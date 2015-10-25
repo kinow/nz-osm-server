@@ -25,7 +25,7 @@
 
 - name: Read data using imposm
   sudo: yes
-  shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read new-zealand-latest.osm.pbf
+  shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read australia-oceania-latest.osm.pbf
   args:
     creates: /var/osm/imposm_coords.cache
     chdir: /var/osm/
@@ -35,7 +35,7 @@
 
 - name: Writes data using imposm
   sudo: yes
-  shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --write --connection postgis://osm:osm@localhost/osm new-zealand-latest.osm.pbf && touch /var/osm/write_ansible_flag
+  shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --write --connection postgis://osm:osm@localhost/osm australia-oceania-latest.osm.pbf && touch /var/osm/write_ansible_flag
   args:
     creates: /var/osm/write_ansible_flag
     chdir: /var/osm/

@@ -6,10 +6,10 @@
 
 - name: Download OSM map from Geofabrik
   sudo: yes
-  shell: wget http://download.geofabrik.de/australia-oceania/new-zealand-latest.osm.pbf
+  shell: wget http://download.geofabrik.de/australia-oceania-latest.osm.pbf
   args:
     chdir: /var/osm/
-    creates: /var/osm/new-zealand-latest.osm.pbf
+    creates: /var/osm/australia-oceania-latest.osm.pbf
   tags:
     - osm
 

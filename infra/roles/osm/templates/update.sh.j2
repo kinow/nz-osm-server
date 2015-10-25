@@ -2,11 +2,11 @@
 
 # Updates the OSM map, calling imposm to update the Posgres database as well
 
-wget -O /var/osm/new-zealand-latest.osm.pbf http://download.geofabrik.de/australia-oceania/new-zealand-latest.osm.pbf
+wget -O /var/osm/australia-oceania-latest.osm.pbf http://download.geofabrik.de/australia-oceania/australia-oceania-latest.osm.pbf
 
-imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read /var/osm/new-zealand-latest.osm.pbf
+imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read /var/osm/australia-oceania-latest.osm.pbf
 
-imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --write --connection postgis://osm:osm@localhost/osm new-zealand-latest.osm.pbf
+imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --write --connection postgis://osm:osm@localhost/osm australia-oceania-latest.osm.pbf
 
 imposm --optimize --mapping-file=/opt/basemaps/imposm-mapping.py -d osm
 
