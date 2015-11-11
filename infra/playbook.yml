@@ -14,7 +14,6 @@
     - imposm
     - osm
     - basemaps
-    - monitoring
 
 - name: This playbook sets up NZOSS GIS Live DVD infrastructure
   hosts: catalyst
