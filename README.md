@@ -12,7 +12,7 @@ different datasets.
 
 ## Infrastructure
 
-The infrastructure is compromised of:
+The infrastructure is comprised of:
 
 * a Postgres database
 * PostGIS extension loaded in Postgres
