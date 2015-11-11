@@ -20,7 +20,7 @@ The infrastructure is comprised of:
 * imposm
 * nginx
 
-This project includes an Ansible playbook, with automated instructions to set up the environment. The playbook
+This project includes an Ansible playbook with automated instructions to set up the environment. The playbook
 works for Vagrant, but it can also be used locally or to set up a server via SSH.
 
 In order to install the infrastructure you will need:
