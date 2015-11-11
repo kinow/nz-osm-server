@@ -1,3 +1,2 @@
 * create a separate role for nginx
-* add NOTICE.txt and LICENSE.txt
 * Add tags
