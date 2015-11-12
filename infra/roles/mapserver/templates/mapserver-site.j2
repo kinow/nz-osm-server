@@ -12,6 +12,9 @@ server {
         fastcgi_pass   127.0.0.1:9999;
         fastcgi_index  mapserv;
         fastcgi_param  SCRIPT_FILENAME  /usr/lib/cgi-bin/mapserv$fastcgi_script_name;
+        if ($arg_map = '') {
+            rewrite ^/(.*)$ /mapserv?map=/opt/basemaps/osm-google.map;
+        }
         include fastcgi_params;
     }
 }
