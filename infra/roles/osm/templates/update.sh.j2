@@ -1,13 +1,33 @@
 #!/bin/bash
 
 # Updates the OSM map, calling imposm to update the Posgres database as well
+# Download and check latest pbs file for Australia and neighbouring countries
+wget -O /var/osm/australia-oceania-latest.osm.pbf http://download.geofabrik.de/australia-oceania-latest.osm.pbf
+wget -O /var/osm/australia-oceania-latest.osm.pbf.md5 http://download.geofabrik.de/australia-oceania-latest.osm.pbf.md5
 
-wget -O /var/osm/australia-oceania-latest.osm.pbf http://download.geofabrik.de/australia-oceania/australia-oceania-latest.osm.pbf
+# grep found in https://help.ubuntu.com/community/HowToMD5SUM
+FILE_MD5=`md5sum /var/osm/australia-oceania-latest.osm.pbf | grep --only-matching -m 1 '^[0-9a-f]*'`
+SRC_MD5=`cat /var/osm/australia-oceania-latest.osm.pbf.md5 | grep --only-matching -m 1 '^[0-9a-f]*'`
 
-imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read /var/osm/australia-oceania-latest.osm.pbf
+if [ "$FILE_MD5" = "$SRC_MD5" ]; then
+  echo "md5 verification passed"
 
-imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --write --connection postgis://osm:osm@localhost/osm australia-oceania-latest.osm.pbf
+  # Generates local cache of OSM data ready for loading into database
+  imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read --overwrite-cache /var/osm/australia-oceania-latest.osm.pbf
+  # Writes data from local cache to database
+  imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --write --connection postgis://osm:osm@localhost/osm australia-oceania-latest.osm.pbf
+  # Optimize the import tables
+  imposm --optimize --mapping-file=/opt/basemaps/imposm-mapping.py -d osm
+  # Deploy to production
+  imposm --mapping-file=/opt/basemaps/imposm-mapping.py -d osm --deploy-production-tables
 
-imposm --optimize --mapping-file=/opt/basemaps/imposm-mapping.py -d osm
+  #You can revert to the previous osm_* tables:
+  #imposm -d osm --recover-production-tables
 
-echo `date` > /var/osm/last_update
+  #And you can remove backup tables (osm_old_*):
+  #imposm -d osm --remove-backup-tables
+
+  echo `date` > /usr/share/nginx/html/last_update.txt
+else
+  echo "md5 verification failed"
+fi
