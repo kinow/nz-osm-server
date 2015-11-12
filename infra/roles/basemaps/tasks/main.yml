@@ -43,9 +43,9 @@
     - osm
     - basemaps
 
-- name: Deploy and optimise tables
+- name: Optimise and deploy tables
   sudo: yes
-  shell: imposm --optimize --mapping-file=/opt/basemaps/imposm-mapping.py -d osm && touch /var/osm/optimise_ansible_flag
+  shell: imposm --optimize --mapping-file=/opt/basemaps/imposm-mapping.py -d osm && imposm --mapping-file=/opt/basemaps/imposm-mapping.py -d osm --deploy-production-tables && touch /var/osm/optimise_ansible_flag
   args:
     creates: /var/osm/optimise_ansible_flag
     chdir: /var/osm/
