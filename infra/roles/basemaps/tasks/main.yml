@@ -80,8 +80,3 @@
     creates: /opt/basemaps/osm-google.map
   tags:
     - basemaps
-
-- name: Fix basemaps osm-google.map permissions
-  file: path=/opt/basemaps/osm-google.map owner=root group=root mode=0755
-  tags:
-    - basemaps
