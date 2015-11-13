@@ -32,6 +32,12 @@ In order to install the infrastructure you will need:
 
 If you are running the Vagrant box, create a new WMS server, with any name, and with the following URL: **http://192.168.100.100/mapserv?map=/opt/basemaps/osm-google.map**. You can replace the IP address by the one of your real server too.
 
+## Testing with OpenLayers
+
+http://192.168.100.100/?mode=browse&template=openlayers&layers=all&map=/opt/basemaps/osm-google.map
+http://192.168.100.100/?mode=browse&template=openlayers&layers=all&map=/opt/basemaps/osm-bing.map
+http://192.168.100.100/?mode=browse&template=openlayers&layers=all&map=/opt/basemaps/osm-michelin.map
+
 ## License
 
 Licensed under the MIT License. See LICENSE.txt.
