@@ -18,19 +18,32 @@
   tags:
     - basemaps
 
+# google
+- shell: echo "google"
+  register: style
+
 - name: Fix basemaps Makefile file
   template: src=Makefile.j2 dest=/opt/basemaps/Makefile owner=root group=root mode=0644
   tags:
     - basemaps
 
-- name: Read data using imposm
-  sudo: yes
-  shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read australia-oceania-latest.osm.pbf
-  args:
-    creates: /var/osm/imposm_coords.cache
-    chdir: /var/osm/
+# bing
+- shell: echo "bing"
+  register: style
+
+- name: Fix basemaps Makefile_bing file
+  template: src=Makefile.j2 dest=/opt/basemaps/Makefile_bing owner=root group=root mode=0644
   tags:
-    - osm
+    - basemaps
+
+# michelin
+
+- shell: echo "michelin"
+  register: style
+
+- name: Fix basemaps Makefile_michelin file
+  template: src=Makefile.j2 dest=/opt/basemaps/Makefile_michelin owner=root group=root mode=0644
+  tags:
     - basemaps
 
 - name: Writes data using imposm
@@ -61,7 +74,7 @@
     - basemaps
 
 - name: Create map file
-  shell: make
+  shell: for f in Makefile*; do make -f $f ; done
   args:
     chdir: /opt/basemaps/
     creates: /opt/basemaps/osm-google.map
