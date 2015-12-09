@@ -15,7 +15,7 @@
 
 - name: Copy update.sh shell script to /var/osm
   sudo: yes
-  template: src=update.sh.j2 dest=/var/osm/update.sh owner=root group=root mode=0644
+  template: src=update.sh.j2 dest=/var/osm/update.sh owner=root group=root mode=0754
   tags:
     - osm
     - cron

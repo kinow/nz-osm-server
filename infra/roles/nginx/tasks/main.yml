@@ -29,6 +29,12 @@
   notify:
     - restart nginx
 
+- name: Copy attribution logo
+  copy: src=catalyst-logo.png dest=/usr/share/nginx/html/catalyst-logo.png
+
+- name: Copy index HTML
+  copy: src=index.html dest=/usr/share/nginx/html/index.html
+
 - name: Enable mapserver nginx site
   file: src="/etc/nginx/sites-available/mapserver-site"
         dest="/etc/nginx/sites-enabled/mapserver-site"
