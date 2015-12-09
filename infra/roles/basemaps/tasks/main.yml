@@ -17,6 +17,8 @@
   template: src=osmbase.map.j2 dest=/opt/basemaps/osmbase.map owner=root group=root mode=0644
   tags:
     - basemaps
+  notify:
+    - remake basemaps
 
 # google
 - shell: echo "google"

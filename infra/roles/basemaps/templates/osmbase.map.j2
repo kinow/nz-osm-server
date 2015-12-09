@@ -14,6 +14,7 @@
 #define xxstr(s) #s
 
 #include STYLEPASTER(THEME)
+
 MAP
 
 FONTSET "fonts.lst"
@@ -27,7 +28,7 @@ WEB
    METADATA
       "ows_enable_request"   "*"
       "labelcache_map_edge_buffer" "-10"
-      "wms_abstract" "New Zealand Open Street Map WMS service provided by Catalyst Cloud"
+      "wms_abstract" "New Zealand OpenStreetMap WMS service provided by Catalyst Cloud"
       "wms_accessconstraints" "Free for limited non-commercial use. The right to charge a fee for commercial use is reserved."
       "wms_addresstype" "street"
       "wms_address" "Catalyst IT, 150 Willis St"
@@ -68,7 +69,6 @@ CONFIG "PROJ_LIB" _proj_lib
 PROJECTION
    "init=epsg:OSM_SRID"
 END
-
 
 #include LEVELPASTER(THEME,0)
 #include "land.map"

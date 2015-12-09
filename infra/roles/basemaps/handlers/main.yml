@@ -1,0 +1,7 @@
+---
+- name: remake basemaps
+  shell: for f in Makefile*; do make -f $f clean ; make -f $f; done
+  args:
+    chdir: /opt/basemaps/
+  tags:
+    - basemaps
