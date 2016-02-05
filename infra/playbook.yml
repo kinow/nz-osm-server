@@ -10,8 +10,8 @@
   roles:
     - locale
     - postgresql
-    - mapserver
     - nginx
+    - mapserver
     - imposm
     - osm
     - basemaps
@@ -27,8 +27,8 @@
   roles:
     - locale
     - postgresql
-    - mapserver
     - nginx
+    - mapserver
     - imposm
     - osm
     - basemaps
