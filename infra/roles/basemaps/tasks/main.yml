@@ -50,7 +50,7 @@
 
 - name: Reads data using imposm
   sudo: yes
-  shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read /var/osm/australia-oceania-latest.osm.pbf && touch /var/osm/read_ansible_flag
+  shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read --overwrite-cache /var/osm/australia-oceania-latest.osm.pbf && touch /var/osm/read_ansible_flag
   args:
     creates: /var/osm/read_ansible_flag
     chdir: /var/osm/
