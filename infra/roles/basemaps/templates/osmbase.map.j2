@@ -70,6 +70,40 @@ PROJECTION
    "init=epsg:OSM_SRID"
 END
 
+LAYER
+  NAME "copyright"
+  STATUS DEFAULT
+  TYPE point
+  TRANSFORM ll # set the image origin to be lower left
+  UNITS PIXELS # sets the units for the feature object
+  #REQUIRES "[poly]"
+  METADATA
+  "wms_enable_request" "!GetCapabilities GetMap"
+  END
+  FEATURE
+    POINTS
+      145 -10    # the offset (from lower left) in pixels
+    END # Points
+    TEXT "Data © OpenStreetMap. Hosted by Catalyst Cloud"  # this is your displaying text
+  END # Feature
+  CLASS
+    STYLE      # has to have a style
+    END # style
+    LABEL      # defines the font, colors etc. of the text
+      FONT scb
+      TYPE truetype
+      SIZE 8
+      BUFFER 1
+      COLOR 0 0 0
+      FORCE true
+      STYLE
+        GEOMTRANSFORM "labelpoly"
+        COLOR 255 255 255  # white
+      END # Style
+    END # Label
+  END # Class
+END # Layer
+
 #include LEVELPASTER(THEME,0)
 #include "land.map"
 #include "landusage.map"
