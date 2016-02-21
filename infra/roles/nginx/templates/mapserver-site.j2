@@ -7,6 +7,7 @@ server {
     listen   80 default_server;
     server_name {{ server_name }};
     access_log /var/log/nginx/mapserver_access.log traffic;
+    error_log /var/log/nginx/mapserver_error.log;
 
     location = /last_update {
         try_files /last_update.txt =404;
