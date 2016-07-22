@@ -1,4 +1,4 @@
-# NZOSS GIS Live DVD infrastructure (Vagrant)
+# NZOSS OSM Server (Vagrant)
 
 This is the documentation for the NZOSS GIS Live DVD infrastructure, using Vagrant and VirtualBox/VMWare to
 create the infrastructure for the server side.
