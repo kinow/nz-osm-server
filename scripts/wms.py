@@ -3,7 +3,7 @@
 from owslib.wms import WebMapService
 
 def main():
-	wms = WebMapService('http://maps.nzoss.org.nz/mapserv?template=openlayers&service=wms&request=getCapabilities', version='1.1.0')
+	wms = WebMapService('http://maps.nzoss.org.nz/mapserv?template=openlayers&service=wms&request=getCapabilities', version='1.3.0')
 
 	layer = 'default'
 	crs = wms[layer].crsOptions
