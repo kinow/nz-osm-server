@@ -6,13 +6,13 @@
     update-cache=yes
   with_items:
     - build-essential
-    - python-dev
+    - python3-dev
     - protobuf-compiler
     - libprotobuf-dev
     - libtokyocabinet-dev
     - python3-psycopg2
-    - libgeos-c1
-    - python-pip
+    - libgeos-c1v5
+    - python3-pip
     - unzip
 
   tags:
