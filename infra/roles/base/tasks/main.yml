@@ -1,0 +1,7 @@
+- name: Install Packages
+  apt: >
+    pkg={{item}}
+    state=present
+    update-cache=yes
+  with_items:
+    - acl

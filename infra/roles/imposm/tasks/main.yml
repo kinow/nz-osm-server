@@ -24,7 +24,7 @@
 
 - name: create database with imposm
   become: yes
-  shell: imposm-psqldb | awk '{ if ($0 != "createlang plpgsql osm") print }' | sed 's/\/path\/to\/pg_hba.conf/\/etc\/postgresql\/9.4\/main\/pg_hba.conf/' | sed 's/\/path\/to\//\/usr\/share\/postgresql\/9.4\/contrib\/postgis-2.1\//' > /var/imposm/create-db.sh && sudo -u postgres /bin/bash /var/imposm/create-db.sh
+  shell: imposm-psqldb | awk '{ if ($0 != "createlang plpgsql osm") print }' | sed 's/\/path\/to\/pg_hba.conf/\/etc\/postgresql\/9.6\/main\/pg_hba.conf/' | sed 's/\/path\/to\//\/usr\/share\/postgresql\/9.6\/contrib\/postgis-2.1\//' > /var/imposm/create-db.sh && sudo -u postgres /bin/bash /var/imposm/create-db.sh
   args:
     creates: /var/imposm/create-db.sh
   notify: restart postgresql
