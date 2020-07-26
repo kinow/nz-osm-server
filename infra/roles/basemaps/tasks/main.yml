@@ -50,32 +50,13 @@
 
 - name: Reads data using imposm
   become: yes
-  shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read --overwrite-cache /var/osm/australia-oceania-latest.osm.pbf && touch /var/osm/read_ansible_flag
+  shell: imposm import -connection postgis://osm:????@localhost/osm -srid 3857 -mapping /opt/basemaps/imposm3-mapping.json -overwritecache -read /var/osm/australia-oceania-latest.osm.pbf -write
   args:
     creates: /var/osm/read_ansible_flag
     chdir: /var/osm/
   tags:
     - osm
     - basemaps
-
-- name: Writes data using imposm
-  become: yes
-  shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --write --connection postgis://osm:osm@localhost/osm australia-oceania-latest.osm.pbf && touch /var/osm/write_ansible_flag
-  args:
-    creates: /var/osm/write_ansible_flag
-    chdir: /var/osm/
-  tags:
-    - osm
-    - basemaps
-
-- name: Optimise and deploy tables
-  become: yes
-  shell: imposm --optimize --mapping-file=/opt/basemaps/imposm-mapping.py -d osm && imposm --mapping-file=/opt/basemaps/imposm-mapping.py -d osm --deploy-production-tables && touch /var/osm/optimise_ansible_flag
-  args:
-    creates: /var/osm/optimise_ansible_flag
-    chdir: /var/osm/
-  tags:
-    - osm
 
 - name: Download basemaps data
   shell: make
