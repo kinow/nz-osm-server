@@ -20,7 +20,7 @@
     - build-essential
     - python-dev
     - python-setuptools
-    - python-psycopg2
+    - python3-psycopg2
     - postgresql-contrib-{{ postgresql_version }}
     - postgresql-{{ postgresql_version }}-postgis-{{ postgis_version }}={{ postgis_package_version }}
     - libpq-dev

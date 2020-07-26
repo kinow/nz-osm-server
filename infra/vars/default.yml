@@ -1,5 +1,5 @@
-postgresql_version: "9.4"
-postgresql_package_version: "9.4.*-1.pgdg14.04+1"
+postgresql_version: "9.6"
+postgresql_package_version: "9.6.*-1.pgdg20.04+1"
 
 logstash_version: "1.5"
 

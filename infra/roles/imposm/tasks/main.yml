@@ -10,7 +10,7 @@
     - protobuf-compiler
     - libprotobuf-dev
     - libtokyocabinet-dev
-    - python-psycopg2
+    - python3-psycopg2
     - libgeos-c1
     - python-pip
     - unzip
