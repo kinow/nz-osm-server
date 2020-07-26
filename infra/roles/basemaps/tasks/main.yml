@@ -1,6 +1,6 @@
 ---
 - name: Download mapserver/basemaps from GitHub
-  sudo: yes
+  become: yes
   shell: wget https://github.com/mapserver/basemaps/archive/master.zip && unzip /opt/master.zip -d /opt/ && mv /opt/basemaps-master /opt/basemaps
   args:
     chdir: /opt/
@@ -49,7 +49,7 @@
     - basemaps
 
 - name: Reads data using imposm
-  sudo: yes
+  become: yes
   shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --read --overwrite-cache /var/osm/australia-oceania-latest.osm.pbf && touch /var/osm/read_ansible_flag
   args:
     creates: /var/osm/read_ansible_flag
@@ -59,7 +59,7 @@
     - basemaps
 
 - name: Writes data using imposm
-  sudo: yes
+  become: yes
   shell: imposm --proj=EPSG:3857 --mapping-file=/opt/basemaps/imposm-mapping.py --write --connection postgis://osm:osm@localhost/osm australia-oceania-latest.osm.pbf && touch /var/osm/write_ansible_flag
   args:
     creates: /var/osm/write_ansible_flag
@@ -69,7 +69,7 @@
     - basemaps
 
 - name: Optimise and deploy tables
-  sudo: yes
+  become: yes
   shell: imposm --optimize --mapping-file=/opt/basemaps/imposm-mapping.py -d osm && imposm --mapping-file=/opt/basemaps/imposm-mapping.py -d osm --deploy-production-tables && touch /var/osm/optimise_ansible_flag
   args:
     creates: /var/osm/optimise_ansible_flag

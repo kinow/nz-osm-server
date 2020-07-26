@@ -5,7 +5,7 @@
     - osm
 
 - name: Download OSM map from Geofabrik
-  sudo: yes
+  become: yes
   shell: wget http://download.geofabrik.de/australia-oceania-latest.osm.pbf
   args:
     chdir: /var/osm/
@@ -14,7 +14,7 @@
     - osm
 
 - name: Copy update.sh shell script to /var/osm
-  sudo: yes
+  become: yes
   template: src=update.sh.j2 dest=/var/osm/update.sh owner=root group=root mode=0754
   tags:
     - osm

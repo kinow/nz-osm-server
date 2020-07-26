@@ -1,8 +1,7 @@
 ---
 - name: This playbook sets up NZ OSM infrastructure with Vagrant
   hosts: vagrant
-  sudo: true
-  sudo_user: root
+  become: true
 
   vars_files:
     - vars/default.yml
@@ -18,8 +17,7 @@
 
 - name: This playbook sets up NZOSS GIS Live DVD infrastructure
   hosts: catalyst
-  sudo: true
-  sudo_user: root
+  become: true
 
   vars_files:
     - vars/default.yml
