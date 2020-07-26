@@ -16,6 +16,6 @@
     - mapserver
 
 - name: Start mapserver server
-  service: name=mapserver state=started enabled=yes
+  sysvinit: name=mapserver state=started enabled=yes
   tags:
     - mapserver
