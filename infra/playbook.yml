@@ -14,7 +14,8 @@
     - postgresql
     - nginx
     - mapserver
-    - imposm
+    # Python2 only, or for version 3 Go
+    # - imposm
     - osm
     - basemaps
 
@@ -33,6 +34,7 @@
     - postgresql
     - nginx
     - mapserver
-    - imposm
+    # Python2 only, or for version 3 Go
+    # - imposm
     - osm
     - basemaps
