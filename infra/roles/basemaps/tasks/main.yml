@@ -50,7 +50,7 @@
 
 - name: Reads data using imposm
   become: yes
-  shell: imposm import -connection postgis://osm:????@localhost/osm -srid 3857 -mapping /opt/basemaps/imposm3-mapping.json -overwritecache -read /var/osm/australia-oceania-latest.osm.pbf -write
+  shell: /opt/imposm3/imposm import -connection postgis://osm:osm@localhost/osm -srid 3857 -mapping /opt/basemaps/imposm3-mapping.json -overwritecache -read /var/osm/australia-oceania-latest.osm.pbf -write
   args:
     creates: /var/osm/read_ansible_flag
     chdir: /var/osm/
