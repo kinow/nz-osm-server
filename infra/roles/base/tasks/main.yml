@@ -4,4 +4,7 @@
     state=present
     update-cache=yes
   with_items:
+    # ansible permissions
     - acl
+    # netstat
+    - net-tools
