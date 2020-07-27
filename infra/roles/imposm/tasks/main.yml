@@ -6,11 +6,6 @@
   tags:
     - imposm
 
-- name: Create path for imposm3
-  file: path=/opt/imposm3/ state=directory owner=root group=root mode=0755
-  tags:
-    - imposm
-
 - name: Unarchive imposm3
   unarchive:
     src: /opt/imposm3.tar.gz
