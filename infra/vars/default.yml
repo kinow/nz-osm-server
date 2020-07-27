@@ -6,3 +6,5 @@ logstash_version: "1.5"
 server_name: 192.168.100.100
 
 locale: en_US.UTF-8
+
+ansible_python_interpreter: "/usr/bin/python3"
