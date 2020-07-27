@@ -14,14 +14,14 @@
     - postgresql
     - nginx
     - mapserver
-    # Python2 only, or for version 3 Go
-    # - imposm
+    - imposm
     - osm
     - basemaps
 
 - name: This playbook sets up NZOSS GIS Live DVD infrastructure
+  gather_facts: no
   hosts: catalyst
-  become: true
+  become: yes
   become_method: sudo
   become_user: root
 
@@ -34,7 +34,6 @@
     - postgresql
     - nginx
     - mapserver
-    # Python2 only, or for version 3 Go
-    # - imposm
+    - imposm
     - osm
     - basemaps
