@@ -1,30 +1,27 @@
 ---
-- name: Install Packages
-  apt: >
-    pkg={{item}}
-    state=present
-    update-cache=yes
-  with_items:
-    - build-essential
-    - python3-dev
-    - protobuf-compiler
-    - libprotobuf-dev
-    - libtokyocabinet-dev
-    - python3-psycopg2
-    - libgeos-c1v5
-    - python3-pip
-    - unzip
-
+- name: Download imposm3 (go binary) and unarchive it into /opt/imposm
+  get_url:
+    url: https://github.com/omniscale/imposm3/releases/download/v0.10.0/imposm-0.10.0-linux-x86-64.tar.gz
+    dest: /opt/imposm3.tar.gz
   tags:
     - imposm
 
-- pip: name=imposm
+- name: Create path for imposm3
+  file: path=/opt/imposm3/ state=directory owner=root group=root mode=0755
+  tags:
+    - imposm
 
-- file: path=/var/imposm/ state=directory mode=0755
+- name: Unarchive imposm3
+  unarchive:
+    src: /opt/imposm3.tar.gz
+    dest: /opt/
+    remote_src: yes
+    list_files: yes
+  register: archive_contents
+  tags:
+    - imposm
 
-- name: create database with imposm
-  become: yes
-  shell: imposm-psqldb | awk '{ if ($0 != "createlang plpgsql osm") print }' | sed 's/\/path\/to\/pg_hba.conf/\/etc\/postgresql\/9.6\/main\/pg_hba.conf/' | sed 's/\/path\/to\//\/usr\/share\/postgresql\/9.6\/contrib\/postgis-2.1\//' > /var/imposm/create-db.sh && sudo -u postgres /bin/bash /var/imposm/create-db.sh
+- name: Move imposm3 directory
+  shell: mv /opt/{{ archive_contents.files[0] }} /opt/imposm3
   args:
-    creates: /var/imposm/create-db.sh
-  notify: restart postgresql
+    creates: /opt/imposm3
