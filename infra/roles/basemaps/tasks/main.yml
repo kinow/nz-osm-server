@@ -49,8 +49,8 @@
     - basemaps
 
 - name: Reads data using imposm
-  become: yes
-  shell: /opt/imposm3/imposm import -connection postgis://osm:osm@localhost/osm -srid 3857 -mapping /opt/basemaps/imposm3-mapping.json -overwritecache -read /var/osm/australia-oceania-latest.osm.pbf -write
+  # imposm3 by default uses schema import, but here we force it to use the public schema
+  shell: /opt/imposm3/imposm import -dbschema-import public -overwritecache -connection postgis://osm:osm@localhost/osm -srid 3857 -mapping /opt/basemaps/imposm3-mapping.json -read /var/osm/australia-oceania-latest.osm.pbf
   args:
     creates: /var/osm/read_ansible_flag
     chdir: /var/osm/
