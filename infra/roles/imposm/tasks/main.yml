@@ -25,3 +25,23 @@
   shell: mv /opt/{{ archive_contents.files[0] }} /opt/imposm3
   args:
     creates: /opt/imposm3
+
+- name: Create imposm database
+  become_user: postgres
+  postgresql_db:
+    name: osm
+
+- name: Connect to osm database and set user's password with no expire date
+  become_user: postgres
+  postgresql_user:
+    db: osm
+    name: osm
+    password: osm
+    priv: "ALL"
+    expires: infinity
+
+- name: Adds postgis extension to the database osm
+  become_user: postgres
+  postgresql_ext:
+    name: postgis
+    db: osm
