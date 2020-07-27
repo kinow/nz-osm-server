@@ -8,3 +8,4 @@
     - acl
     # netstat
     - net-tools
+    - unzip
