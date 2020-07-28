@@ -19,7 +19,7 @@
     - basemaps
 
 - name: This playbook sets up NZOSS GIS Live DVD infrastructure
-  gather_facts: no
+  gather_facts: yes
   hosts: catalyst
   become: yes
   become_method: sudo
@@ -33,6 +33,7 @@
     - locale
     - postgresql
     - nginx
+    - letsencrypt
     - mapserver
     - imposm
     - osm

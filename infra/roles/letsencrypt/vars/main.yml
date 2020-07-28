@@ -1,0 +1,4 @@
+---
+# vars file for letsencrypt
+domain_maps: maps.nzoss.org.nz
+deps: ['certbot', 'python3-certbot-nginx']

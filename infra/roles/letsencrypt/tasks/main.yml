@@ -1,0 +1,26 @@
+---
+# tasks file for letsencrypt
+# Normally:
+# add-apt-repository ppa:certbot/certbot -y
+# apt-get install python-certbot-nginx -y
+# certbot --nginx -d example.com -d www.example.com
+
+# For rasperry pi however:
+# git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
+# ./certbot-auto certonly -d example.com -d wiki.example.com -d nagios.example.com --nginx
+# Check if Letsencrypt is checked out
+# Install dependencies
+- name: Install dependencies
+  apt: pkg="{{item}}" state=present
+  with_items:
+    - "{{deps}}"
+
+- name: Generate Certificate for Domains
+  become: yes
+  become_user: root
+  shell: certbot --nginx -d '{{ domain_maps }}' -n -m brunodepaulak@yahoo.com.br --agree-tos
+  args:
+    chdir: /opt/letsencrypt
+    creates: nginx-cert-created
+  notify:
+    - restart nginx
